@@ -32,6 +32,8 @@ install_base <- function() {
     install.packages(c("data.table", "tidyverse", "Matrix", "MASS", "coda",
                        "xml2", "tictoc", "gtools", "codetools", "janitor",
                        "fitdistrplus", "lubridate", "ggplot2", "ggthemes",
+                       "HDInterval",
                        "gganimate", "ggcorrplot", "cowplot", "pROC",
                        "microbenchmark"))
 }
+# Adding HDInterval package
