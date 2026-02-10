@@ -19,8 +19,14 @@ plot_chains <- function(dataset = "fb-test", scen = 1, rep = 1) {
         base_dir <- str_glue("datasets/{dataset}")
         data_dir <- str_glue("{base_dir}/data")
         res_dir <- str_glue("{base_dir}/results")
-        gfx_dir <- str_glue("{base_dir}/gfx/chains/")
+        gfx_dir <- str_glue("{base_dir}/gfx")
+        chains_dir <- str_glue("{gfx_dir}/gfx/chains")
     }
+    
+    c(gfx_dir, chains_dir) |>
+        discard(dir.exists) |>
+        walk(~ message("- mkdir ", .x)) |>
+        walk(dir.create, recursive = TRUE)
     
     trace_files <- list.files(str_glue("{data_dir}/scen-{scen}-{rep}-out/output-inf"),
                               "param_", full.names = TRUE) |>
@@ -92,7 +98,7 @@ plot_chains <- function(dataset = "fb-test", scen = 1, rep = 1) {
     
     plts$empty <- ggplot() + theme_classic()
     
-    sildt1 <- "sildt" |> str_split_1("")
+    sildt1 <- str_chars("sildt")
     sildt2 <- str_c(sildt1, sildt1)
     any_non_empty <- function(x) any(x != "empty")
     
